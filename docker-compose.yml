@@ -1,0 +1,23 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/home/volumes/mongo:/data/db"
+      - "/etc/localtime:/etc/localtime"
+    restart: always
+    environment:  
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: root123
+      #MONGO_INITDB_ROOT_DB: nodebb
+     # MONGO_INITDB_DATABASE: nodebb
+      wiredTigerCacheSizeGB: 0.25
+  nodebb:
+    image: nodebb/docker
+    container_name: nodebb
+    ports:
+      - "4567:4567"
+    restart: always
